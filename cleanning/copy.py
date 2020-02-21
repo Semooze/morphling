@@ -1,5 +1,5 @@
 import re
-
+import csv
 
 class Copy:
     def __init__(self, reader, writer):
@@ -12,7 +12,7 @@ class Copy:
         message_tmps = list()
         tmp_list = list()
         index_check = [
-            '\d+',
+            '[\w\d_-]+',
             '\w+',
             '\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}',
             '\d+',
@@ -65,6 +65,27 @@ class Copy:
                 queue_list = list()
         reader.close()
 
+    def restruct_csv(self, source_path, destination_path):
+        with open(source_path, 'r') as reader, open(destination_path, 'w') as file_writer:
+            writer = csv.writer(file_writer, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            string = reader.readline()
+            new_list = re.split(',', string)
+            header = new_list[0:7]
+            tmp = new_list[7]
+            last_header, first_field = tmp.split('\n')
+            header.append(last_header)
+            writer.writerow(header)
+            queue_list = list()
+            for line in reader:
+                line_list = re.split(',', line)
+                self._transform(line_list)
+                queue_list.extend(line_list)
+                if self._is_complete_row(queue_list):
+                    self.__construct(queue_list)
+                    queue_list = list()
+                    if len(self.data):
+                        writer.writerow(self.data[0])
+                        self.data = list()
 
     def _is_complete_row(self, new_list):
         """Check whether the list including a competed row or not"""
