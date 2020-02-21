@@ -6,16 +6,22 @@ class Copy:
         self.reader = reader
         self.writer = writer
         self.data = list()
-
+    #May be suppoert only multiplne or file end with newline
     def construct(self, file_path):
         string = self.reader.read(file_path)
         new_list = re.split(',', string)
         field = 0
         message_tmps = list()
         tmp_list = list()
-        index_check = [ '\d+', '\w+', '\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}', '\d+', '\w+', '\d+', '\w\n{0,1}']
+        index_check = [ '\d+', '\w+', '\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}', '\d+', '\w+', '\d+', '.*\n{0,1}']
         for string in new_list:
-            if field != 2 and re.search(index_check[field], string):
+            if field == 6 and string.find('\n') != -1:
+                words = string.split('\n')
+                tmp_list.append(words[0])
+                self.data.append(tmp_list)
+                tmp_list = [words[1]]
+                field = 1
+            elif field != 2 and re.search(index_check[field], string):
                 tmp_list.append(string)
                 field += 1
             elif field == 2 and re.search(index_check[field], string):

@@ -3,6 +3,7 @@ from cleanning.input import Reader
 from cleanning.copy import Copy
 from cleanning.output import Writer
 
+
 class TestCopyData(unittest.TestCase):
     def test_be_able_to_create_data_struct_from_intput_data(self):
         reader = Reader()
@@ -12,7 +13,18 @@ class TestCopyData(unittest.TestCase):
         actual = obj.data
         self.assertEqual(
             actual,
-            [['1079784248112951296', 'reply', '@PNchP_ เสียจัยอะ เพื่อนงัย นี่เพื่อนเอง', '2019-01-01 00:00:00', '560', 'twitter', '1904452146', 'หมีชมพู']],
+            [
+                [
+                    '1079784248112951296',
+                    'reply',
+                    '@PNchP_ เสียจัยอะ เพื่อนงัย นี่เพื่อนเอง',
+                    '2019-01-01 00:00:00',
+                    '560',
+                    'twitter',
+                    '1904452146',
+                    'หมีชมพู',
+                ]
+            ],
         )
 
     def test_ba_able_to_create_data_struct_when_there_are_space_between_message(self):
@@ -60,7 +72,60 @@ class TestCopyData(unittest.TestCase):
         )
 
     def test_be_able_to_construct_when_owner_id_is_emoji(self):
-        pass
+        reader = Reader()
+        writer = Writer()
+        obj = Copy(reader, writer)
+        obj.construct('test/input_file/owner_name_end_with_emoji')
+        actual = obj.data
+        self.assertEqual(
+            actual,
+            [
+                [
+                    '1079784244640010240',
+                    'tweet',
+                    'จุดพลุกันสนุกมากนะ',
+                    '2019-01-01 00:00:00',
+                    '9672',
+                    'twitter',
+                    '1013618778',
+                    '💖',
+                ]
+            ],
+        )
+
+    def test_be_able_to_construct_from_multiple_line(self):
+        reader = Reader()
+        writer = Writer()
+        obj = Copy(reader, writer)
+        obj.construct('test/input_file/multiple_line')
+        actual = obj.data
+        print('***************************************')
+        print(actual)
+        self.assertEqual(
+            actual,
+            [
+                [
+                    '1079784244640010240',
+                    'tweet',
+                    'จุดพลุกันสนุกมากนะ',
+                    '2019-01-01 00:00:00',
+                    '9672',
+                    'twitter',
+                    '1013618778',
+                    '💖',
+                ],
+                [
+                    '1079784248112951296',
+                    'reply',
+                    '@PNchP_ เสียจัยอะ เพื่อนงัย นี่เพื่อนเอง',
+                    '2019-01-01 00:00:00',
+                    '560',
+                    'twitter',
+                    '1904452146',
+                    'หมีชมพู',
+                ],
+            ],
+        )
 
     def test_be_able_to_write_data_into_file_with_csv_format(self):
         reader = Reader()
@@ -71,4 +136,8 @@ class TestCopyData(unittest.TestCase):
         obj.to_csv(output_path)
         with open(output_path, 'r') as reader:
             expect = reader.read()
-        self.assertEqual('1079784248112951296,reply,@PNchP_ เสียจัยอะ เพื่อนงัย นี่เพื่อนเอง,2019-01-01 00:00:00,560,twitter,1904452146,หมีชมพู\n', expect)
+        self.assertEqual(
+            '1079784248112951296,reply,@PNchP_ เสียจัยอะ เพื่อนงัย นี่เพื่อนเอง,2019-01-01 00:00:00,560,twitter,1904452146,หมีชมพู\n',
+            expect,
+        )
+
