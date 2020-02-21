@@ -12,7 +12,11 @@ class Reader:
             return await afp.read()
 
     def read(self, file_path):
-        return asyncio.run(self._async_read(file_path))
+        reader = open(file_path,'r')
+        data = reader.read()
+        reader.close()
+        return data
     
     def read_line(self, file_path):
-        return asyncio.run(self._async_read_line(file_path))
+        reader = open(file_path,'r')
+        return reader

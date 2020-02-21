@@ -122,6 +122,16 @@ class TestCopyData(unittest.TestCase):
                     '1904452146',
                     'หมีชมพู',
                 ],
+                [
+                    '1079784248717070336',
+                    'tweet',
+                    'dear past ,\nthank you for all the lessons.\n\n.\n#HappyNewYear2019 https://t.co/LNIo1hGeoR',
+                    '2019-01-01 00:00:00',
+                    '5209',
+                    'twitter',
+                    '1192256738',
+                    'Maink มองโลก',
+                ]
             ],
         )
 
@@ -131,8 +141,6 @@ class TestCopyData(unittest.TestCase):
         obj = Copy(reader, writer)
         obj.construct_csv('test/input_file/csv_format')
         actual = obj.data
-        print('*******************************')
-        print(actual)
         self.assertEqual(
             actual,
             [
@@ -171,3 +179,18 @@ class TestCopyData(unittest.TestCase):
             '1079784248112951296,reply,@PNchP_ เสียจัยอะ เพื่อนงัย นี่เพื่อนเอง,2019-01-01 00:00:00,560,twitter,1904452146,หมีชมพู\n',
             expect,
         )
+
+
+    # def test_test(self):
+    #     reader = Reader()
+    #     writer = Writer()
+    #     obj = Copy(reader, writer)
+    #     obj.construct_csv('test/input_file/rawdata.csv')
+    #     output_path = 'test/output_file/cleaned_data.csv'
+    #     obj.to_csv(output_path)
+    #     with open(output_path, 'r') as reader:
+    #         expect = reader.read()
+    #     self.assertEqual(
+    #         '1079784248112951296,reply,@PNchP_ เสียจัยอะ เพื่อนงัย นี่เพื่อนเอง,2019-01-01 00:00:00,560,twitter,1904452146,หมีชมพู\n',
+    #         expect,
+    #     )

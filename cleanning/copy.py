@@ -1,17 +1,25 @@
 import re
 
-class Copy:
 
+class Copy:
     def __init__(self, reader, writer):
         self.reader = reader
         self.writer = writer
         self.data = list()
-    
+
     def __construct(self, data):
         field = 0
         message_tmps = list()
         tmp_list = list()
-        index_check = [ '\d+', '\w+', '\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}', '\d+', '\w+', '\d+', '.*\n{0,1}']
+        index_check = [
+            '\d+',
+            '\w+',
+            '\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}',
+            '\d+',
+            '\w+',
+            '\d+',
+            '.*\n{0,1}',
+        ]
         for string in data:
             if field == 6 and string.find('\n') != -1:
                 words = string.split('\n')
@@ -23,7 +31,7 @@ class Copy:
                 tmp_list.append(string)
                 field += 1
             elif field == 2 and re.search(index_check[field], string):
-                tmp_list.append(','.join(message_tmps))
+                tmp_list.append(''.join(message_tmps))
                 message_tmps = list()
                 tmp_list.append(string)
                 field += 1
@@ -33,9 +41,11 @@ class Copy:
                 self.data.append(tmp_list)
                 tmp_list = list()
                 field = 0
+        return tmp_list
 
     def construct_csv(self, file_path):
-        string = self.reader.read(file_path)
+        reader = self.reader.read_line(file_path)
+        string = reader.readline()
         new_list = re.split(',', string)
         header = new_list[0:7]
         tmp = new_list[7]
@@ -44,12 +54,66 @@ class Copy:
         self.data.append(header)
         del new_list[0:8]
         new_list.insert(0, first_field)
-        self.__construct(new_list)
+        queue_list = list()
+        for string in reader:
+            new_list = re.split(',', string)
+            self._transform(new_list)
+            queue_list.extend(new_list)
+            if self._is_complete_row(queue_list):
+                ###Maybe need to return from construct and push into queue list
+                self.__construct(queue_list)
+                queue_list = list()
+        reader.close()
+
+
+    def _is_complete_row(self, new_list):
+        """Check whether the list including a competed row or not"""
+        field = 0
+        index_check = ['\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}', '\d+', '\w+', '\d+', '.*\n{0,1}']
+        if len(new_list) < 8:
+            return False
+        for string in new_list:
+            match = re.search(index_check[field], string)
+            if match:
+                field += 1
+            if field == 5:
+                break
+        return True if field == 5 else False
+
+    def _transform(self, new_list):
+        index = None
+        for string in new_list:
+            match = re.search('\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}', string)
+            if match:
+                index = new_list.index(string)
+                break
+        if index:
+            if index == 2:
+                tmps = new_list[:index]
+                del new_list[:index]
+                new_list.insert(index - 1, ','.join(tmps))
+            # else:
+            #     tmps = new_list[:index]
+            #     del new_list[:index]
+            #     new_list.insert(index - 1, ','.join(tmps))
+        elif len(new_list) > 3:
+            tmps = new_list[2:]
+            del new_list[2:]
+            new_list.append(','.join(tmps))
 
     def construct(self, file_path):
-        string = self.reader.read(file_path)
-        new_list = re.split(',', string)
-        self.__construct(new_list)
+        """Crate nested list to represent data"""
+        reader = self.reader.read_line(file_path)
+        queue_list = list()
+        for string in reader:
+            new_list = re.split(',', string)
+            self._transform(new_list)
+            queue_list.extend(new_list)
+            if self._is_complete_row(queue_list):
+                ###Maybe need to return from construct and push into queue list
+                self.__construct(queue_list)
+                queue_list = list()
+        reader.close()
 
     def to_csv(self, file_path):
         self.writer.to_csv(self.data, file_path)
