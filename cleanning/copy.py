@@ -22,7 +22,6 @@ class Copy:
             '[\d\w]+',
             '.*\n{0,1}',
         ]
-        #Maybe only check to match date time
         for string in data:
             if field == 6 and string.find('\n') != -1:
                 words = string.split('\n')
@@ -63,7 +62,6 @@ class Copy:
             self._transform(new_list)
             queue_list.extend(new_list)
             if self._is_complete_row(queue_list):
-                ###Maybe need to return from construct and push into queue list
                 self.__construct(queue_list)
                 queue_list = list()
         reader.close()
@@ -91,7 +89,7 @@ class Copy:
                         self.data = list()
 
     def _is_complete_row(self, new_list):
-        """Check whether the list including a competed row or not"""
+        """Check whether the list including a competed row or not (already have all column)"""
         field = 0
         index_check = ['\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}', '\d+', '\w+', '[\d\w]+', '.*\n{0,1}']
         if len(new_list) < 8:
@@ -108,11 +106,11 @@ class Copy:
         return True if field == 5 else False
 
     def _transform(self, new_list):
+        """Concate string between line to create complete list (have all row)"""
         index = None
         for string in new_list:
             datetime_match = re.search('\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}', string)
             message_match = re.search('\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}[\]\n\w \d)]+', string)
-            #workaround for date\n
             if datetime_match and not message_match:
                 index = new_list.index(string)
                 break
@@ -121,10 +119,7 @@ class Copy:
                 tmps = new_list[:index]
                 del new_list[:index]
                 new_list.insert(index - 1, ','.join(tmps))
-            # else:
-            #     tmps = new_list[:index]
-            #     del new_list[:index]
-            #     new_list.insert(index - 1, ','.join(tmps))
+
         elif len(new_list) > 3:
             tmps = new_list[2:]
             del new_list[2:]
@@ -136,10 +131,15 @@ class Copy:
         queue_list = list()
         for string in reader:
             new_list = re.split(',', string)
+            #To support case owner name is different line
+            if (3 > len(queue_list) > 0) and (re.search('\n', queue_list[0]) or re.search('\n', queue_list[1])):
+                id_match = re.search('[\w\d_-]+', string)
+                if id_match:
+                    self.data[-1][-1] = self.data[-1][-1] + '\n' + ','.join(queue_list)
+                    queue_list = list()
             self._transform(new_list)
             queue_list.extend(new_list)
             if self._is_complete_row(queue_list):
-                ###Maybe need to return from construct and push into queue list
                 self.__construct(queue_list)
                 queue_list = list()
         reader.close()
