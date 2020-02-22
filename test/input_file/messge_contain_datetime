@@ -1,0 +1,49 @@
+1079784250675613698,tweet,2019-01-01 00:00:01
+6. Chiang Rai
+7. #NHK紅白
+8. #ICONSIAM
+9. #อยากบอกอะไรygก่อนปีใหม่มั้ย
+10. #แผ่นดินไหว,2019-01-01 00:00:01,880,twitter,837126367779008512,TopTrendThai
+1108050502279819265,tweet,2019-03-20 00:00:00 6. toy story 4 7. Blind Trust 8. #ลดโลกเลอะกับผลิต 9. #จดหมายเด็กแมว 10. #OCLOCK,2019-03-20 00:00:00,4132,twitter,837126367779008512,TopTrendThai
+1108051014274314240,tweet,Rank 1 Youtube Trend 2019-03-20 00:02:01 เลิกคุยทั้งอำเภอเพื่อเธอคนเดียว - ลิลลี่ ได้หมดถ้าสดชื่น Feat.เก้า เกริกพล [OFFICIAL MV】,2019-03-20 00:02:03,8075,twitter,837126367779008512,TopTrendThai
+1102252313303904256,reply,@icez นิยายอัพเดท: Dreamcatcher : Corona Australis Academy (2019-03-03 23:59:14) https://t.co/7BUEIV1s2e,2019-03-04 00:00:05,2287,twitter,254500720,icez network
+1102614688255238144,tweet,Twitter Trend
+2019-03-05 00:00:01
+1. #thevoiceTH
+2. #กรงกรรม
+3. #จันทร์Shockโลกยังไงซิ
+4. #หัวใจศิลา
+5. #ดีใจด้วยนะ,2019-03-05 00:00:01,7406,twitter,837126367779008512,TopTrendThai
+38667962,post,ลง Skyrim ใน Steam ใหม่ เนื่องจากว่าอยู่ดีๆ ตัวเกมมันหายไป(ไม่ได้กด Uninstall เลย) และอยากกลับมาเล่นใหม่<br />
+<br />
+ปรากฏว่า มันลงไม่ได้....และมันจะสุ่ม Error มา แต่ละครั้งจะไม่เหมือนกัน เช่น<br />
+<br />
+การอ่านดิสก์ผิดพลาด<br />
+ดิสก์เสียหาย<br />
+ไฟล์อัพเดตเสียหาย<br />
+<br />
+<img class="img-in-post" src="https://f.ptcdn.info/021/063/000/poirsfi8dCQ9zZa5TZW-o.png" data-image="img:544x139" /> <img class="img-in-post" src="https://f.ptcdn.info/021/063/000/poirsfudeCJ0LMlJDJ5-o.png" data-image="img:520x119" /> <img class="img-in-post" src="https://f.ptcdn.info/021/063/000/poirsf82a0yD1Uowr6G-o.png" data-image="img:492x125" /><br />
+จากนั้นก็ลอง....<br />
+<br />
+- ให้ Steam ตรวจสอบเกม<br />
+- ลบแล้วลงใหม่(ไม่ผ่านการให้ Steam ครวจสอบเกมแบบครั้งก่อน คือลงแบบ Clean เลย)<br />
+- ลบไฟล์ที่มีปัญหา ในที่นี้คือ dragonborn.bsa และ HighResTexturePack03.bsa ออก แล้วให้ Steam ครวจสอบไฟล์ใหม่<br />
+- ใช้คำสั่ง chkdsk แล้วกลับไปทำซ้ำข้อ 1-3<br />
+- ก็อปไฟล์ที่มันขึ้น Error จากอีกเครื่องมาลงทับ<br />
+- เอา Backup จากอีกเครื่องมาใส่<br />
+- ลบแคช<br />
+<br />
+ลองทำหมดแล้วก็เหมือนเดิม<br />
+<br />
+เลยลองให้ Steam ซ่อมคลังเกมใหม่ดูและใช้คำสั่ง chkdsk ปรากฏว่ามันไม่มีอะไรผิดปกติเลย และไม่มีแจ้ง Error มาด้วย<br />
+<br />
+<img class="img-in-post" src="https://f.ptcdn.info/021/063/000/poirsfh0zyca8P6sUZ0-o.png" data-image="img:619x895" /> <img class="img-in-post" src="https://f.ptcdn.info/021/063/000/poirsfd93dhT857B5OZ-o.png" data-image="img:1333x625" /> <img class="img-in-post" src="https://f.ptcdn.info/021/063/000/poirsf3bxut0QpNcTSkE-o.png" data-image="img:1327x606" /><br />
+ไฟล์ Log ใน Steam<br />
+<br />
+<img class="img-in-post" src="https://f.ptcdn.info/021/063/000/poirsgn22TFW18ynxbH-o.png" data-image="img:1791x469" /><br />
+<div class="code-style">[2019-03-17 22:36:26] Failed to write chunk in file <br />
+&quot;Data\HighResTexturePack03.bsa&quot;, 1048576 bytes at offset 1013856808 (Device Corrupt)</div><br />
+ไม่ไหวแล้ว....ลองลักไก่ รันเกมโดยตรงจาก SkyrimLauncher.exe ก็ไม่ได้ มันบังคับอัพเดตแล้วก็แบบนี้<br />
+<br />
+<img class="img-in-post" src="https://f.ptcdn.info/021/063/000/poirx3oooWUW1SUS991-o.png" data-image="img:553x191" /><br />
+สรุปคือลองทุกอย่างแล้ว แล้วควรจะทำยังไงต่อดี??,2019-03-18 00:01:16,2344,pantip,663452,MrCatZaa

@@ -11,15 +11,18 @@ class Copy:
         field = 0
         message_tmps = list()
         tmp_list = list()
+        check_datetime = '\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}'
+        check_datetime_message = '\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}[\]\n\w \d)]+'
         index_check = [
             '[\w\d_-]+',
             '\w+',
-            '\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}',
+            check_datetime,
             '\d+',
             '\w+',
-            '\d+',
+            '[\d\w]+',
             '.*\n{0,1}',
         ]
+        #Maybe only check to match date time
         for string in data:
             if field == 6 and string.find('\n') != -1:
                 words = string.split('\n')
@@ -30,12 +33,12 @@ class Copy:
             elif field != 2 and re.search(index_check[field], string):
                 tmp_list.append(string)
                 field += 1
-            elif field == 2 and re.search(index_check[field], string):
+            elif field == 2 and re.search(index_check[field], string) and not re.search(check_datetime_message, string):
                 tmp_list.append(''.join(message_tmps))
                 message_tmps = list()
                 tmp_list.append(string)
                 field += 1
-            elif field == 2 and not re.search(index_check[field], string):
+            elif field == 2:
                 message_tmps.append(string)
             if field == 7:
                 self.data.append(tmp_list)
@@ -90,12 +93,15 @@ class Copy:
     def _is_complete_row(self, new_list):
         """Check whether the list including a competed row or not"""
         field = 0
-        index_check = ['\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}', '\d+', '\w+', '\d+', '.*\n{0,1}']
+        index_check = ['\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}', '\d+', '\w+', '[\d\w]+', '.*\n{0,1}']
         if len(new_list) < 8:
             return False
         for string in new_list:
             match = re.search(index_check[field], string)
-            if match:
+            message_match = re.search('\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}[\]\n\w \d)]+', string)
+            if field == 0 and match and not message_match:
+                field += 1
+            elif field != 0 and match:
                 field += 1
             if field == 5:
                 break
@@ -104,8 +110,10 @@ class Copy:
     def _transform(self, new_list):
         index = None
         for string in new_list:
-            match = re.search('\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}', string)
-            if match:
+            datetime_match = re.search('\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}', string)
+            message_match = re.search('\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}[\]\n\w \d)]+', string)
+            #workaround for date\n
+            if datetime_match and not message_match:
                 index = new_list.index(string)
                 break
         if index:
