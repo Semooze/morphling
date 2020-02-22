@@ -347,12 +347,26 @@ class TestCopyData(unittest.TestCase):
         reader = Reader()
         writer = Writer()
         obj = Copy(reader, writer)
-        obj.restruct_csv('test/input_file/csv_format', 'test/output_file/cleaned_data.csv')
-        with open('test/output_file/cleaned_data.csv', 'r') as reader:
-            expect = reader.read()
+        destination_source = 'test/output_file/csv_format.csv'
+        obj.restruct_csv('test/input_file/csv_format', destination_source)
+        with open(destination_source, 'r') as reader:
+            actual = reader.read()
         self.assertEqual(
             'id,type,message,time,engagement,channel,owner id,owner name\n1079784248717070336,tweet,"dear past ,\nthank you for all the lessons.\n\n.\n#HappyNewYear2019 https://t.co/LNIo1hGeoR",2019-01-01 00:00:00,5209,twitter,1192256738,Maink มองโลก\n',
-            expect,
+            actual,
+        )
+
+    def test_be_able_to_restruct_csv_file_when_owner_name_is_seperate_line(self):
+        reader = Reader()
+        writer = Writer()
+        obj = Copy(reader, writer)
+        destination_source = 'test/output_file/csv_owner_name_has_new_line_in_between.csv'
+        obj.restruct_csv('test/input_file/csv_owner_name_has_new_line_in_between', destination_source)
+        with open(destination_source, 'r') as reader:
+            actual = reader.read()
+        self.assertEqual(
+            'id,type,message,time,engagement,channel,owner id,owner name\n1079784248112951296,reply,@PNchP_ เสียจัยอะ เพื่อนงัย นี่เพื่อนเอง,2019-01-01 00:00:00,560,twitter,1904452146,หมีชมพู\npcnk_2hand_Bvo-Iy3g7gw,post,"🌻🌻🌻 เสื้อน่ารักผ้าใส่สบาย 50฿ . 📌 ✨ลทบ 30 ems 50\n✨เกงยีนส์ 40 ems 60\n\n__________________________\nกติกา📢📢📢 ‼️‼️ เอฟใต้รูป หรือทักหาแม่ค้าได้เลยน้าาา‼️‼️ ❌เอฟก่อนโอนก่อนส่งก่อน งดดราม่าจ้าาา❌ 🙏🏻พร้อมโอนค่อยทักมานะคะ ไม่เอฟเล่นน้าาา🙏🏻 #เสื้อผ้ามือสอง #โล๊ะตู้ #เสื้อผ้าแฟชั่น #เสื้อผ้า #โล๊ะตู้เสื้อผ้ามือสอง #ส่งต่อเสื้อผ้ามือสอง #โล๊ะตู้เสื้อผ้า #โล๊ะเสื้อผ้า #เสื้อผ้าสวยๆ #2hand #ส่งต่อสภาพนางฟ้า #ส่งต่อ #เสื้อผ้าถูกๆ #เสื้อผ้ามือ2 #เสื้อผ้าราคาถูก #เสื้อผ้าราคาถูกพร้อมส่ง #เสื้อผ้าราคาเบาๆ #สภาพนางฟ้า #มือสองสภาพดี #มือสองราคาถูก #กางเกง #วินเทจ #เกงยีนส์ #กางเกงถูกๆ #2hand  #2handthailand #มือสอง #วินเทจ #ราคาถูก #เสื้อผ้าน่ารัก",2019-03-31 00:04:21,3860,instagram,10677434124,"HELLO 👋 \nเสื้อผ้ามือ 1,2👕👗"\n1112038291539263489,tweet,ซื้อบัตร cat6 ดีม่ะ หรือจะเก็บเงินไปซื้อของ cat t-shirt,2019-03-31 00:06:04,315,twitter,267263658,มุกสุเตรียมขึ้นวอร์ดmed\n',
+            actual,
         )
 
     def test_be_able_to_write_data_into_file_with_csv_format(self):
@@ -370,8 +384,8 @@ class TestCopyData(unittest.TestCase):
         )
 
     # def test_test(self):
-            # print('\n' * 5)
-            # print(obj.data)
+    #     # print('\n' * 5)
+    #     # print(obj.data)
     #     reader = Reader()
     #     writer = Writer()
     #     obj = Copy(reader, writer)

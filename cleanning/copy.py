@@ -68,6 +68,7 @@ class Copy:
 
     def restruct_csv(self, source_path, destination_path):
         with open(source_path, 'r') as reader, open(destination_path, 'w') as file_writer:
+
             writer = csv.writer(file_writer, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             string = reader.readline()
             new_list = re.split(',', string)
@@ -77,16 +78,37 @@ class Copy:
             header.append(last_header)
             writer.writerow(header)
             queue_list = list()
+            #To support case owner name is different line
+            post_queue = list()
+            complete_list = False
             for line in reader:
+                #To support case owner name is different line
+                if (3 > len(queue_list) > 0) and (re.search('\n', queue_list[0]) or re.search('\n', queue_list[1])):
+                    id_match = re.search('[\w\d_-]+', line)
+                    if id_match:
+                        post_queue[-1][-1] = post_queue[-1][-1] + '\n' + ','.join(queue_list).rstrip()
+                        writer.writerow(post_queue[0])
+                        complete_list = False
+                        post_queue = list()
+                        queue_list = list()
                 line_list = re.split(',', line)
                 self._transform(line_list)
                 queue_list.extend(line_list)
                 if self._is_complete_row(queue_list):
                     self.__construct(queue_list)
                     queue_list = list()
+                    complete_list = True
+                    if len(post_queue):
+                        writer.writerow(post_queue[0])
+                        post_queue = list()
+                        queue_list = list()
                     if len(self.data):
-                        writer.writerow(self.data[0])
+                        post_queue.extend(self.data)
                         self.data = list()
+            if len(post_queue):
+                writer.writerow(post_queue[0])
+                post_queue = list()
+                queue_list = list()
 
     def _is_complete_row(self, new_list):
         """Check whether the list including a competed row or not (already have all column)"""
