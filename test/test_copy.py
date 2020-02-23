@@ -1,7 +1,7 @@
 import unittest
-from cleanning.input import Reader
-from cleanning.copy import Copy
-from cleanning.output import Writer
+from morphling.input import Reader
+from morphling.copy import Copy
+from morphling.output import Writer
 
 
 class TestCopyData(unittest.TestCase):

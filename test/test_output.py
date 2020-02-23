@@ -1,6 +1,6 @@
 import unittest
 
-from cleanning.output import Writer
+from morphling.output import Writer
 
 
 class TestWriter(unittest.TestCase):

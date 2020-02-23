@@ -1,6 +1,6 @@
 import unittest
-from cleanning.input import Reader
-from cleanning.copy import Copy
+from morphling.input import Reader
+from morphling.copy import Copy
 
 
 class TestImportData(unittest.TestCase):
