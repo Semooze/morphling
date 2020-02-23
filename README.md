@@ -1,0 +1,1 @@
+[![Actions Status](https://github.com/Semooze/morphling/workflows/Morphling/badge.svg)](https://github.com/Semooze/Morphling/actions)
