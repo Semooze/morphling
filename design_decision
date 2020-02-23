@@ -15,3 +15,5 @@ Tasks
   (Have a service that clean a data and produce to sevetral formats such as json/xlm/queue)
 2 A new service that read new data and produce visualizeation
 3 Maybe use queue when it need to be stream
+4 Do clean data as a library because in quite generalize and can use in another service and library support write once share everywhere
+5 Unit test help a lot

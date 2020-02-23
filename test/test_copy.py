@@ -382,11 +382,4 @@ class TestCopyData(unittest.TestCase):
             '1079784248112951296,reply,@PNchP_ เสียจัยอะ เพื่อนงัย นี่เพื่อนเอง,2019-01-01 00:00:00,560,twitter,1904452146,หมีชมพู\n',
             expect,
         )
-
-    # def test_test(self):
-    #     # print('\n' * 5)
-    #     # print(obj.data)
-    #     reader = Reader()
-    #     writer = Writer()
-    #     obj = Copy(reader, writer)
-    #     obj.restruct_csv('test/input_file/rawdata.csv', 'test/output_file/cleaned_data.csv')
+        
