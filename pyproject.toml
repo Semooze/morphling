@@ -6,7 +6,7 @@ build-backend = "flit_core.buildapi"
 module = "morphling"
 author = "Sem"
 author-email = "cloudtimewater@gmail.com"
-home-page = "https://github.com/Semooze"
+home-page = "https://github.com/Semooze/morphling"
 classifiers = ["License :: OSI Approved :: MIT License"]
 
 requires = [
