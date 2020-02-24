@@ -3,8 +3,17 @@ requires = ["flit_core >=2,<3"]
 build-backend = "flit_core.buildapi"
 
 [tool.flit.metadata]
-module = "clean_data"
+module = "morphling"
 author = "Sem"
 author-email = "cloudtimewater@gmail.com"
+home-page = "https://github.com/Semooze"
 classifiers = ["License :: OSI Approved :: MIT License"]
 
+requires = [
+    "aiofile==1.5.2",
+    "Click==7.0",
+    "flit==2.2.0"
+]
+requires-python = "~=3.7"
+[tool.flit.scripts]
+morphling = "morphling:script"
