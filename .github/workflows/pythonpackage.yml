@@ -22,20 +22,6 @@ jobs:
     - name: Create output file
       run: |
         mkdir test/output_file
-        touch test/output_file/basic_write
-        touch test/output_file/basic_data_to_csv
-        touch test/output_file/csv_format.csv
-        touch test/output_file/csv_owner_name_has_new_line_in_between.csv
-        touch test/output_file/test_write_csv_comma.csv
-        touch test/output_file/test_write_csv_new_line.csv
-        touch test/output_file/test_write_csv.csv
-#     - name: Lint with flake8
-#       run: |
-#         pip install flake8
-#         # stop the build if there are Python syntax errors or undefined names
-#         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-#         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-#         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with unittest
       run: |
         python -m unittest test.test_copy
