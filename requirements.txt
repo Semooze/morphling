@@ -2,6 +2,7 @@
 aiofile==1.5.2
 certifi==2019.11.28
 chardet==3.0.4
+click==7.0
 docutils==0.16
 flit-core==2.2.0
 flit==2.2.0
