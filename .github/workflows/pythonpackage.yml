@@ -24,6 +24,4 @@ jobs:
         mkdir test/output_file
     - name: Test with unittest
       run: |
-        python -m unittest test.test_copy
-        python -m unittest test.test_input
-        python -m unittest test.test_output
+        python -m unittest
