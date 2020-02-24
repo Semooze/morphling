@@ -8,12 +8,38 @@ This library use to transform and reformat various data type. (Right now it just
 
 Available command 
 ```shell
-morphling --help
+$ morphling --help
+Usage: morphling [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  clean-csv  This function will rewrite csv file with double qoute embrace a string
+  when it is in different line.
 ```
 
 Available option for command
 ```shell
-morphling clean-csv --help
+$ morphling clean-csv --help
+Usage: morphling clean-csv [OPTIONS]
+
+  This function will rewrite csv file with double qoute embrace a string
+  when it is in different line.
+
+  args:
+
+      * src: Location where intput file live.
+
+      * des: Location where output file will be placed. Note that it the
+      directory must exist.
+
+Options:
+  --src TEXT  Location where intput file live.
+  --des TEXT  Location where output file will be placed. Note that it the
+              directory must exist.
+  --help      Show this message and exit.
+
 ```
 
 Reformat csv
