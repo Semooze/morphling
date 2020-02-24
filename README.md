@@ -4,6 +4,13 @@
 # Morpling
 
 This library use to transform and reformat various data type. (Right now it just support specific case which is reformat csv)
+
+## Install 
+
+```shell
+$ pip install morphling
+```
+
 ## How to use
 
 Available command 
