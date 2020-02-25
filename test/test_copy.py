@@ -340,6 +340,16 @@ class TestCopyData(unittest.TestCase):
                     '1192256738',
                     'Maink มองโลก',
                 ],
+                [
+                    '1079784281419862021',
+                    'tweet',
+                    '𝙃𝘼𝙋𝙋𝙔 𝙉𝙀𝙒 𝙔𝙀𝘼𝙍 𝟮𝟬𝟭𝟵 🌻💛\n𝑀𝑎𝑦 𝟤𝟢𝟣𝟫 𝑏𝑒 𝑡𝘩𝑒 𝑦𝑒𝑎𝑟 𝑤𝘩𝑒𝑛 𝑎𝑙𝑙 𝑦𝑜𝑢𝑟 𝑑𝑟𝑒𝑎𝑚𝑠 𝑐𝑜𝑚𝑒 𝑡𝑟𝑢𝑒, 𝑎𝑙𝑙 𝑦𝑜𝑢𝑟 𝘩𝑎𝑟𝑑 𝑤𝑜𝑟𝑘 𝑟𝑒𝑎𝑝 𝑔𝑟𝑒𝑎𝑡 𝑟𝑒𝑠𝑢𝑙𝑡𝑠 𝑎𝑛𝑑 𝑟𝑒𝑤𝑎𝑟𝑑𝑠. 𝐻𝑎𝑝𝑝𝑦 𝑁𝑒𝑤 𝑌𝑒𝑎𝑟. #JANUARYWISH https://t.co/wBHjlps4hQ',
+                    '2019-01-01 00:00:08',
+                    '4715',
+                    'twitter',
+                    '986274954030137344',
+                    'ป้อกแป้ก',
+                ],
             ],
         )
 
@@ -352,7 +362,7 @@ class TestCopyData(unittest.TestCase):
         with open(destination_source, 'r') as reader:
             actual = reader.read()
         self.assertEqual(
-            'id,type,message,time,engagement,channel,owner id,owner name\n1079784248717070336,tweet,"dear past ,\nthank you for all the lessons.\n\n.\n#HappyNewYear2019 https://t.co/LNIo1hGeoR",2019-01-01 00:00:00,5209,twitter,1192256738,Maink มองโลก\n',
+            'id,type,message,time,engagement,channel,owner id,owner name\n1079784248717070336,tweet,"dear past ,\nthank you for all the lessons.\n\n.\n#HappyNewYear2019 https://t.co/LNIo1hGeoR",2019-01-01 00:00:00,5209,twitter,1192256738,Maink มองโลก\n1079784281419862021,tweet,"𝙃𝘼𝙋𝙋𝙔 𝙉𝙀𝙒 𝙔𝙀𝘼𝙍 𝟮𝟬𝟭𝟵 🌻💛\n𝑀𝑎𝑦 𝟤𝟢𝟣𝟫 𝑏𝑒 𝑡𝘩𝑒 𝑦𝑒𝑎𝑟 𝑤𝘩𝑒𝑛 𝑎𝑙𝑙 𝑦𝑜𝑢𝑟 𝑑𝑟𝑒𝑎𝑚𝑠 𝑐𝑜𝑚𝑒 𝑡𝑟𝑢𝑒, 𝑎𝑙𝑙 𝑦𝑜𝑢𝑟 𝘩𝑎𝑟𝑑 𝑤𝑜𝑟𝑘 𝑟𝑒𝑎𝑝 𝑔𝑟𝑒𝑎𝑡 𝑟𝑒𝑠𝑢𝑙𝑡𝑠 𝑎𝑛𝑑 𝑟𝑒𝑤𝑎𝑟𝑑𝑠. 𝐻𝑎𝑝𝑝𝑦 𝑁𝑒𝑤 𝑌𝑒𝑎𝑟. #JANUARYWISH https://t.co/wBHjlps4hQ",2019-01-01 00:00:08,4715,twitter,986274954030137344,ป้อกแป้ก\n',
             actual,
         )
 
@@ -361,7 +371,9 @@ class TestCopyData(unittest.TestCase):
         writer = Writer()
         obj = Copy(reader, writer)
         destination_source = 'test/output_file/csv_owner_name_has_new_line_in_between.csv'
-        obj.restruct_csv('test/input_file/csv_owner_name_has_new_line_in_between', destination_source)
+        obj.restruct_csv(
+            'test/input_file/csv_owner_name_has_new_line_in_between', destination_source
+        )
         with open(destination_source, 'r') as reader:
             actual = reader.read()
         self.assertEqual(
@@ -382,4 +394,3 @@ class TestCopyData(unittest.TestCase):
             '1079784248112951296,reply,@PNchP_ เสียจัยอะ เพื่อนงัย นี่เพื่อนเอง,2019-01-01 00:00:00,560,twitter,1904452146,หมีชมพู\n',
             expect,
         )
-        

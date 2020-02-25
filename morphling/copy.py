@@ -140,7 +140,7 @@ class Copy:
             if index == 2:
                 tmps = new_list[:index]
                 del new_list[:index]
-                new_list.insert(index - 1, ','.join(tmps))
+                new_list.insert(0, ','.join(tmps))
 
         elif len(new_list) > 3:
             tmps = new_list[2:]
