@@ -7,7 +7,7 @@ def create_word_list(source_path, destination_path):
     result = list()
     for sentence in data.message:
         words = word_tokenize(sentence, engine='attacut', keep_whitespace=False)
-        striped_word = [ word.strip() for word in words if word.strip() != '']
+        striped_word = [ word.strip() for word in words if len(word) > 1 and word.strip() != '']
         result.extend(striped_word)
     with open(destination_path, 'wb') as f:
         pickle.dump(result, f)
