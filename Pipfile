@@ -7,6 +7,9 @@ name = "pypi"
 flit = "*"
 aiofile = "*"
 click = "*"
+pandas = "*"
+pythainlp = "*"
+attacut = "*"
 
 [dev-packages]
 black = "==19.10b0"
