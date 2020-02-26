@@ -12,8 +12,17 @@ classifiers = ["License :: OSI Approved :: MIT License"]
 requires = [
     "aiofile==1.5.2",
     "Click==7.0",
-    "flit==2.2.0"
+    "pythainlp==2.1.4",
+    "pandas==1.0.1",
+    "attacut==1.0.6"
 ]
 requires-python = "~=3.7"
+
+[tool.flit.metadata.requires-extra]
+dev = [
+    "flit==2.2.0",
+    "black==19.10b0"
+]
+
 [tool.flit.scripts]
 morphling = "morphling:script"

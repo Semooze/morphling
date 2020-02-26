@@ -1,6 +1,7 @@
 # Byte-compiled / optimized / DLL files
 *.csv
 test/output_file/*
+!test/output_file/output_here
 __pycache__/
 
 
