@@ -22,7 +22,7 @@ Options:
   --help  Show this message and exit.
 
 Commands:
-  clean-csv     This function will rewrite csv file with double qoute...
+  clean-csv     This function will rewrite csv file with double quote...
   hashtag-list  This function create list of hashtag in binary format file.
   word-list     This function create list of word in binary format file.
 ```
@@ -32,7 +32,7 @@ Available option for command
 $ morphling clean-csv --help
 Usage: morphling clean-csv [OPTIONS]
 
-  This function will rewrite csv file with double qoute embrace a string
+  This function will rewrite csv file with double quote embrace a string
   when it is in different line.
 
   args:
@@ -60,7 +60,8 @@ For example
 $ morphling clean-csv --src=./rawdata.csv --des=./test_clean.csv
 ```
 
-The above example will create new file name 'test_clean.csv' which have the same data with 'rawdata.csv' but add double qoute when
+The above example will create new file name 'test_clean.csv' which have the same data with 'rawdata.csv' but add double quote
+when
 data in the same field is in different line. Basically it takes around 2 minutes to complete (for file ~760MB).
 
 Create word list
