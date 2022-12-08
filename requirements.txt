@@ -1,7 +1,7 @@
 -i https://pypi.org/simple
 aiofile==1.5.2
 attacut==1.0.6
-certifi==2019.11.28
+certifi==2022.12.7
 chardet==3.0.4
 click==7.0
 dill==0.3.1.1
